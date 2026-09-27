@@ -1,0 +1,23 @@
+# LangGraph wiring (src/graph.py)
+langgraph>=1.2.9
+
+# LLM calls only (src/llm_client.py; router.py, relevance_filter.py, hyde_fallback.py,
+# generation.py). NOT used for embeddings -- see fastembed below. See indexing.md,
+# section 3 for the two-pivot history (Sentence Transformer -> Gemini -> fastembed).
+google-genai>=2.25.0
+python-dotenv>=1.1.1
+pydantic>=2.13.5
+
+# Local embeddings (src/indexing/embedder.py) -- BAAI/bge-small-en-v1.5 via fastembed
+# (ONNX Runtime, no torch). Chosen over sentence-transformers (torch can't install here --
+# Windows Long Path support disabled) and over Gemini's embed_content (free tier caps at
+# ~1000/day, too little for this corpus). Fully local: no daily quota, no network round-trip.
+fastembed>=0.8.1
+
+# Indexing (src/indexing/build_index.py) + retrieval (src/retrieval/*)
+faiss-cpu>=1.15.1
+rank_bm25>=0.2.2
+numpy>=2.2.2
+
+# Added incrementally as each component is built:
+# deepeval                   -> eval/*  (component docs/eval.md)

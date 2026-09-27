@@ -1,0 +1,25 @@
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Corpus + generated index -- regenerable, see data/README.md (that file isn't matched by
+# any of these patterns, so it stays tracked without needing a negation rule).
+data/d2l-en/
+data/faiss.index
+data/metadata_store.json
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Claude Code local session state -- not part of the project
+.claude/
+
+# Internal planning/dev-process docs -- not meant for the public repo
+CLAUDE.md
+component docs/
